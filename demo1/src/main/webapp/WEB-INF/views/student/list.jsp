@@ -36,7 +36,7 @@
         </div>
     </div>
 </nav>
-<a href="/students?action=create">
+<a href="/student/create" methods="get">
     <button class="btn btn-primary mt-4">Thêm</button>
 </a>
 <table class="table table-hover">
@@ -66,7 +66,7 @@
             </c:choose>
         </td>
         <td>
-            <a href="/students?action=edit&id=${student.id}"><button class="btn btn-warning">Sửa</button></a>
+            <a href="/student/edit/${student.id}"><button class="btn btn-warning">Sửa</button></a>
             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal${student.id}">Xóa
             </button>
             <div class="modal fade" id="deleteModal${student.id}" tabindex="-1" aria-labelledby="exampleModalLabel"

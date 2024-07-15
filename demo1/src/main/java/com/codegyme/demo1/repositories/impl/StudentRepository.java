@@ -20,4 +20,32 @@ public class StudentRepository implements IStudentRepository {
     public List<Student> findAll() {
         return students;
     }
+
+    @Override
+    public void add(Student student) {
+        student.setId(students.get(students.size()-1).getId()+1);
+        students.add(student);
+    }
+
+    @Override
+    public Student getStudentById(Integer id) {
+        for (Student student : students) {
+            if (student.getId() == id) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void editStudent(Student student) {
+        for(Student s:students){
+            if(s.getId() == student.getId()){
+                s.setName(student.getName());
+                s.setAddress(student.getAddress());
+                s.setPoint(student.getPoint());
+                break;
+            }
+        }
+    }
 }
