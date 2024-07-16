@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: tphan
@@ -11,6 +12,13 @@
     <title>Result</title>
 </head>
 <body>
-<p>${firstOp} ${op} ${secondOp} = ${result}</p>
+<p>
+    <c:if test="${msg==''}">
+        ${firstOp} ${op} ${secondOp} = ${result}
+    </c:if>
+    <c:if test="${msg!=''}">
+        ${msg}
+    </c:if>
+</p>
 </body>
 </html>

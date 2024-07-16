@@ -16,7 +16,7 @@ public class MainRepository {
     }
     public void save(String[] condiments) {
         Order order = new Order(condiments);
-        order.setId(orders.size() + 1);
+        order.setId(orders.get(orders.size()-1).getId() + 1);
         orders.add(order);
     }
 

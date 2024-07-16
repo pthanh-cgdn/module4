@@ -18,6 +18,7 @@ public class MainController {
         double secondOp = Double.parseDouble(sop);
         double result = 0;
         String op="";
+        String msg="";
         switch (operator) {
             case "add":
                 result = firstOp + secondOp;
@@ -32,6 +33,9 @@ public class MainController {
                 op="x";
                 break;
             case "div":
+                if(secondOp == 0){
+                    msg = "Could not devide to 0";
+                }
                 result = firstOp / secondOp;
                 op = "/";
                 break;
@@ -40,6 +44,7 @@ public class MainController {
         model.addAttribute("op", op);
         model.addAttribute("firstOp", firstOp);
         model.addAttribute("secondOp", secondOp);
+        model.addAttribute("msg", msg);
         return "result";
     }
 }
