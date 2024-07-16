@@ -1,12 +1,13 @@
-package com.codegyme.simple_dictionary.repositories;
+package com.codegyme.simple_dictionary.repositories.impl;
 
+import com.codegyme.simple_dictionary.repositories.IDicRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class DicRepository {
+public class DicRepository implements IDicRepository {
     static private Map<String,String> dictionary = new HashMap<>();
     static{
         dictionary.put("hello","xin chao");

@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Create new customer</title>
@@ -26,21 +28,22 @@
 <p>
     <a href="/student">Back to student list</a>
 </p>
-<form method="post">
+
+<form:form method="post" modelAttribute="student">
     <fieldset>
         <legend>Student information</legend>
         <table>
             <tr>
                 <td>Name:</td>
-                <td><input type="text" name="name" id="name"></td>
+                <td><form:input path="name"/></td>
             </tr>
             <tr>
                 <td>Address:</td>
-                <td><input type="text" name="address" id="address"></td>
+                <td><form:input path="address"/></td>
             </tr>
             <tr>
                 <td>Point:</td>
-                <td><input type="text" name="point" id="mark"></td>
+                <td><form:input path="point"/></td>
             </tr>
             <tr>
                 <td></td>
@@ -48,6 +51,6 @@
             </tr>
         </table>
     </fieldset>
-</form>
+</form:form>
 </body>
 </html>
