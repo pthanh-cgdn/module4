@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>Edit product</h1>
+<p th:if="${message} != null">
+    <span class="message" th:text="${message}"></span>
+</p>
+<p>
+    <a href="/product">Back to product list</a>
+</p>
+<form method="post" th:action="@{/product/edit}" th:object="${product}">
+    <fieldset>
+        <legend>Product information</legend>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td>
+                    <input type="hidden" th:field="*{id}"/>
+                    <input type="text" th:field="*{name}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Category:</td>
+                <td><input type="text"  th:field="*{categoryName}"/></td>
+            </tr>
+            <tr>
+                <td>Manufacture:</td>
+                <td><input type="text" th:field="*{manufacture}"/></td>
+            </tr>
+            <tr>
+                <td>Price:</td>
+                <td><input type="text" th:field="*{price}"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Edit product"></td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+</body>
+</html>

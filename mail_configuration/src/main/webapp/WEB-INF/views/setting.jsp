@@ -8,7 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Mail Setting</title>
 </head>
@@ -34,7 +34,7 @@
         </tr>
         <tr>
             <td>
-                Span filter:
+                Spam filter:
             </td>
             <td>
                 <form:checkbox path="SpamFilter"/>
