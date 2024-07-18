@@ -12,54 +12,55 @@ import java.util.List;
 
 
 @Controller
+@RequestMapping("/product")
 public class ProductController {
     @Autowired
     private IProductService productService;
 
-    @GetMapping("/product")
+    @GetMapping()
     public String display(Model model){
         model.addAttribute("products", productService.getAll());
         return "product/display";
     }
-    @GetMapping("product/create")
+    @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("product", new Product());
         return "product/create";
     }
-    @GetMapping("product/edit/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") String id,Model model) {
         model.addAttribute("product",productService.findProductById(Integer.parseInt(id)));
         return "product/edit";
     }
-    @GetMapping("product/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") String id,Model model) {
         model.addAttribute("product",productService.findProductById(Integer.parseInt(id)));
         return "/product/delete";
     }
 
 
-    @GetMapping("product/sort")
+    @GetMapping("/sort")
     public String sort(@RequestParam("sortBy") String sortBy,Model model) {
         model.addAttribute("products",productService.sort(sortBy));
         return "product/display";
     }
 
-    @PostMapping("product/create")
+    @PostMapping("/create")
     public String create(@ModelAttribute("product") Product product, Model model) {
         productService.addProduct(product);
         return "redirect:/product";
     }
-    @PostMapping("product/edit")
+    @PostMapping("/edit")
     public String edit(@ModelAttribute("product") Product product, Model model) {
         productService.editProduct(product);
         return "redirect:/product";
     }
-    @PostMapping("product/delete")
+    @PostMapping("/delete")
     public String delete(@ModelAttribute("product") Product product) {
         productService.remove(product);
         return "redirect:/product";
     }
-    @PostMapping("product/search")
+    @PostMapping("/search")
     public String search(@RequestParam("search") String search, Model model) {
         model.addAttribute("products",productService.search(search));
         return "product/display";
