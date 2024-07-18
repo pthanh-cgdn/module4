@@ -1,6 +1,7 @@
 package com.codegyme.product_management.services.impl;
 
 import com.codegyme.product_management.models.Product;
+import com.codegyme.product_management.repositories.IProductRepository;
 import com.codegyme.product_management.repositories.impl.ProductRepository;
 import com.codegyme.product_management.services.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import java.util.List;
 @Service
 public class ProductService implements IProductService {
     @Autowired
-    private ProductRepository productRepository;
+    private IProductRepository productRepository;
     public boolean addProduct(Product product) {
         return productRepository.add(product);
     }
