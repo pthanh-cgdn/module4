@@ -3,12 +3,15 @@ package com.codegyme.blog.controllers;
 import com.codegyme.blog.models.Blog;
 import com.codegyme.blog.services.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -18,20 +21,23 @@ public class BlogController {
     @Autowired
     private IBlogService blogService;
 
-    @GetMapping()
-    public String display(Model model){
+    @GetMapping
+    public ModelAndView display(@PageableDefault(value = 2) Pageable pageable){
 //        Pageable pageable= PageRequest.of(0, 2);
-        model.addAttribute("categoryArray", new String[]{"Chính trị", "Kinh tế", "Giáo dục", "Xã hội","Sống"});
-        model.addAttribute("blogs", blogService.findAll());
-        return "blog/display";
+        Page<Blog> blogs = blogService.findAll(pageable);
+        ModelAndView modelAndView = new ModelAndView("/blog/display");
+        modelAndView.addObject("categoryArray", new String[]{"Chính trị", "Kinh tế", "Giáo dục", "Xã hội","Sống"});
+        modelAndView.addObject("blogs", blogs);
+        return modelAndView;
     }
     @GetMapping("/category")
-    public String category(@RequestParam("categoryName") String category,Model model){
+    public ModelAndView category(@RequestParam("categoryName") String category,@PageableDefault(value = 2) Pageable pageable){
 //        Pageable pageable= PageRequest.of(0, 2);
-        model.addAttribute("blogs", blogService.findByCategoryName(category));
-        model.addAttribute("selectedCategory", category);
-        model.addAttribute("categoryArray", new String[]{"Chính trị", "Kinh tế", "Giáo dục", "Xã hội","Sống"});
-        return "blog/display";
+        ModelAndView modelAndView = new ModelAndView("/blog/display");
+        modelAndView.addObject("blogs", blogService.findByCategoryName(pageable,category));
+        modelAndView.addObject("selectedCategory", category);
+        modelAndView.addObject("categoryArray", new String[]{"Chính trị", "Kinh tế", "Giáo dục", "Xã hội","Sống"});
+        return modelAndView;
     }
 
     @GetMapping("/create")
@@ -83,8 +89,10 @@ public class BlogController {
         return "redirect:/blog";
     }
     @PostMapping("/search")
-    public String search(@RequestParam("search") String search, Model model) {
-        model.addAttribute("blogs",blogService.search(search));
-        return "blog/display";
+    public ModelAndView search(@RequestParam("search") String search, @PageableDefault(value = 2) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("/blog/display");
+        modelAndView.addObject("blogs",blogService.search(pageable,search));
+        modelAndView.addObject("categoryArray", new String[]{"Chính trị", "Kinh tế", "Giáo dục", "Xã hội","Sống"});
+        return modelAndView;
     }
 }

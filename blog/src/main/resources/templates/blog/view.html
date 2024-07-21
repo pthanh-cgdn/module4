@@ -12,9 +12,7 @@
 <body>
 <nav th:replace="~{common/template::navbar}">
 </nav>
-<p>
-    <a href="/blog">Back to blog list</a>
-</p>
+
 <h5 th:text="${blog.categoryName}"></h5>
 <h1 th:text="${blog.name}"></h1>
 <h5 th:text="${blog.author}"></h5>

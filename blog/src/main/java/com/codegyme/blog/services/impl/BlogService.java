@@ -14,39 +14,40 @@ import java.util.List;
 @Service
 public class BlogService implements IBlogService {
     @Autowired
-    private IBlogRepository productRepository;
+    private IBlogRepository blogRepository;
     public boolean save(Blog blog) {
         blog.setCreatedAt(LocalDateTime.now());
-        return productRepository.save(blog) != null;
+        return blogRepository.save(blog) != null;
     }
 
     public Blog findBlogById(int blogId) {
-        return productRepository.findById(blogId).orElse(null);
+        return blogRepository.findById(blogId).orElse(null);
     }
 
     public void remove(Blog blog) {
-        productRepository.delete(blog);
+        blogRepository.delete(blog);
     }
 
     public boolean editBlog(Blog blog) {
-        return productRepository.save(blog)!=null;
+        return blogRepository.save(blog)!=null;
     }
 
-    public List<Blog> findAll() {
+    public Page<Blog> findAll(Pageable pageable) {
+            return blogRepository.findAll(pageable);
 
 //        Pageable pageable = PageRequest.of(0, 2);
-//        List<Blog> pagedData = productRepository.findAllByOrderByCreatedAtDesc(pageable);
+//        Page<Blog> pagedData = blogRepository.findAllByOrderByCreatedAtDesc(pageable);
 //        return pagedData;
-        return productRepository.findAllByOrderByCreatedAtDesc();
+//        return blogRepository.findAllByOrderByCreatedAtDesc();
     }
 
-    public List<Blog> search(String searchContent) {
-        return productRepository.findAllByNameContainingIgnoreCase(searchContent);
+    public Page<Blog> search(Pageable pageable,String searchContent) {
+        return blogRepository.findAllByNameContainingIgnoreCase(pageable,searchContent);
     }
 
     @Override
-    public List<Blog> findByCategoryName(String category) {
-        return productRepository.findAllByCategoryNameOrderByCreatedAtDesc(category);
+    public Page<Blog> findByCategoryName(Pageable pageable, String category) {
+        return blogRepository.findAllByCategoryNameOrderByCreatedAtDesc(pageable,category);
     }
 
 //    public List<Product> sort(String sortBy) {

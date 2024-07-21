@@ -5,36 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4eb87c54-efe8-4135-8315-d345de28e2df" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/controllers/BlogController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/models/Blog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/repositories/IBlogRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/services/IBlogService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/services/impl/BlogService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/create.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/delete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/display.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/edit.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/view.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../blog/src/main/resources/templates/common/template.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo1/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo1/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo1/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo1/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo1/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../demo1/.idea/webContexts.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../mail_configuration/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../mail_configuration/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../mail_configuration/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../mail_configuration/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../product_management/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../product_management/.idea/webContexts.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../product_management/src/main/webapp/WEB-INF/views/common/template.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../product_management/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../product_management/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../product_management/src/main/java/com/codegyme/product_management/repositories/IProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product_management/src/main/java/com/codegyme/product_management/repositories/IProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../product_management/src/main/java/com/codegyme/product_management/repositories/impl/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../product_management/src/main/java/com/codegyme/product_management/repositories/impl/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../product_management/src/main/webapp/WEB-INF/views/product/display.html" beforeDir="false" afterPath="$PROJECT_DIR$/../product_management/src/main/webapp/WEB-INF/views/product/display.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/controllers/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/controllers/BlogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/repositories/IBlogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/repositories/IBlogRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/services/IBlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/services/IBlogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/services/impl/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/services/impl/BlogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/display.html" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/display.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -200,7 +175,7 @@
       <option name="presentableId" value="Default" />
       <updated>1720944427378</updated>
       <workItem from="1720944428541" duration="1804000" />
-      <workItem from="1721102119449" duration="10667000" />
+      <workItem from="1721102119449" duration="11265000" />
     </task>
     <servers />
   </component>

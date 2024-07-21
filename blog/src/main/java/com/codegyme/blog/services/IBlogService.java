@@ -1,6 +1,8 @@
 package com.codegyme.blog.services;
 
 import com.codegyme.blog.models.Blog;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -13,11 +15,11 @@ public interface IBlogService {
 
     public boolean editBlog(Blog blog);
 
-    public List<Blog> findAll() ;
+//    public List<Blog> findAll() ;
+    public Page<Blog> findAll(Pageable pageable);
+    public Page<Blog> search(Pageable pageable,String searchContent) ;
 
-    public List<Blog> search(String searchContent) ;
-
-    public List<Blog> findByCategoryName(String category);
+    public Page<Blog> findByCategoryName(Pageable pageable, String category);
 
 //    public List<Product> sort(String sortBy) ;
 }
