@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <th:block th:replace="~{common/template::linkBootstrap}">
+    </th:block>
+</head>
+<body>
+<nav th:replace="~{common/template::navbar}">
+
+</nav>
+
+<a href="/blog/create">
+    <p th:if="${message} != null">
+        <span class="message" th:text="${message}"></span>
+    </p>
+    <button class="btn btn-primary mt-4">Add new Blog</button>
+</a>
+<form action="/blog/category">
+    <span> Search by Category: </span>
+<select name="categoryName">
+    <option th:each="category : ${categoryArray}" th:value="${category}" th:text="${category}" th:selected="${category == selectedCategory}">
+    </option>
+</select>
+<button type="submit">Search</button>
+</form>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>ID
+        </th>
+        <th>Name
+        </th>
+        <th>Author
+        </th>
+        <th>Category
+        </th>
+        <th>Description </th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each = "blog,index:${blogs}">
+            <td th:text="${index.count}"></td>
+            <td th:text="${blog.name}"></td>
+            <td th:text="${blog.author}"></td>
+            <td th:text="${blog.categoryName}"></td>
+
+            </td>
+            <td th:text="${blog.Description}"></td>
+
+            <td>
+                <a th:href="@{/blog/view/{id}(id=${blog.id})}">
+                    <button class="btn btn-success">View</button>
+                </a>
+                <a th:href="@{/blog/edit/{id}(id=${blog.id})}">
+                    <button class="btn btn-warning">Edit</button>
+                </a>
+                <a th:href="@{/blog/delete/{id}(id=${blog.id})}">
+                    <button class="btn btn-danger">Delete</button>
+                </a>
+            </td>
+    </tr>
+<!--    <ul>-->
+<!--        <li th:each="item : ${pagedData.content}">-->
+<!--        </li>-->
+<!--    </ul>-->
+
+<!--    <div th:if="${pagedData.hasNext()}">-->
+<!--        <a th:href="@{/your-url?page=${pagedData.number + 1}}">Next Page</a>-->
+<!--    </div>-->
+
+<!--    <div th:if="${pagedData.hasPrevious()}">-->
+<!--        <a th:href="@{/your-url?page=${pagedData.number - 1}}">Previous Page</a>-->
+<!--    </div>-->
+    </tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

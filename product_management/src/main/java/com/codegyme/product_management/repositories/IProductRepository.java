@@ -1,6 +1,7 @@
 package com.codegyme.product_management.repositories;
 
 import com.codegyme.product_management.models.Product;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

@@ -1,13 +1,14 @@
 package com.codegyme.product_management.repositories.impl;
 
 import com.codegyme.product_management.models.Product;
+import com.codegyme.product_management.repositories.IProductRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityTransaction;
 import java.util.List;
 
 @Repository(value = "productRepository")
-public class ProductRepository {
+public class ProductRepository implements IProductRepository {
 
     public boolean add(Product product) {
         EntityTransaction transaction = BaseRepository.entityManager.getTransaction();

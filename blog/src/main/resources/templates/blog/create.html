@@ -1,0 +1,59 @@
+<!doctype html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--xmlns:form="http://www.w3.org/1999/xhtml"-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create Blog</title>
+
+</head>
+<body>
+<h1>Create new blog</h1>
+    <p th:if="${message} != null">
+        <span class="message" th:text="${message}"></span>
+    </p>
+<p>
+    <a href="/blog">Back to blog homepage</a>
+</p>
+<form method="post" th:object="${blog}">
+    <fieldset>
+        <legend>Blog information</legend>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" th:field="*{name}"/></td>
+            </tr>
+            <tr>
+                <td>Author:</td>
+                <td><input type="text" th:field="*{author}"/></td>
+            </tr>
+            <tr>
+                <td>Category:</td>
+<!--                <td><input type="text" th:field="*{categoryName}"/></td>-->
+                <td>
+                <select th:field="*{categoryName}">
+                    <option th:each="category : ${categoryArray}" th:value="${category}" th:text="${category}">
+                    </option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+                <td><input type="text" th:field="*{description}"/></td>
+            </tr>
+            <tr>
+                <td>Content:</td>
+                <td><textarea cols="80" rows="10" th:field="*{content}"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Create new blog"></td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+</body>
+</html>
