@@ -35,7 +35,7 @@
 <!--                <td><input type="text" th:field="*{categoryName}"/></td>-->
                 <td>
                 <select th:field="*{categoryName}">
-                    <option th:each="category : ${categoryArray}" th:value="${category}" th:text="${category}">
+                    <option th:each="category : ${categoryArray}" th:value="${category}" th:text="${category}" >
                     </option>
                 </select>
                 </td>

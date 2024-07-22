@@ -57,6 +57,7 @@ public class BlogController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") String id,Model model) {
         model.addAttribute("blog",blogService.findBlogById(Integer.parseInt(id)));
+        model.addAttribute("categoryArray", new String[]{"Chính trị", "Kinh tế", "Giáo dục", "Xã hội","Sống"});
         return "/blog/edit";
     }
     @GetMapping("/delete/{id}")

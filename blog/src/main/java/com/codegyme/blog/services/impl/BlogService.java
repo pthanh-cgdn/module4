@@ -34,16 +34,8 @@ public class BlogService implements IBlogService {
 
     public Page<Blog> findAll(Pageable pageable) {
             return blogRepository.findAll(pageable);
-
-//        Pageable pageable = PageRequest.of(0, 2);
-//        Page<Blog> pagedData = blogRepository.findAllByOrderByCreatedAtDesc(pageable);
-//        return pagedData;
-//        return blogRepository.findAllByOrderByCreatedAtDesc();
     }
 
-//    public Page<Blog> search(Pageable pageable,String searchContent) {
-//        return blogRepository.findAllByNameContainingIgnoreCaseOrCategoryName(pageable,searchContent);
-//    }
 
     @Override
     public Page<Blog> findByCategoryName(Pageable pageable, String category) {

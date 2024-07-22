@@ -30,7 +30,12 @@
             </tr>
             <tr>
                 <td>Category:</td>
-                <td><input type="text" th:field="*{categoryName}"/></td>
+                <td>
+                    <select th:field="*{categoryName}">
+                        <option th:each="category : ${categoryArray}" th:value="${category}" th:text="${category}" th:selected="${category==blog.categoryName}">
+                        </option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>Description:</td>

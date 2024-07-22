@@ -15,13 +15,9 @@ public interface IBlogService {
 
     public boolean editBlog(Blog blog);
 
-//    public List<Blog> findAll() ;
     public Page<Blog> findAll(Pageable pageable);
-//    public Page<Blog> search(Pageable pageable,String searchContent) ;
 
     public Page<Blog> findByCategoryName(Pageable pageable, String category);
 
     Page<Blog> findAllByName(Pageable pageable, String searchByName);
-
-//    public List<Product> sort(String sortBy) ;
 }
