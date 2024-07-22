@@ -41,13 +41,18 @@ public class BlogService implements IBlogService {
 //        return blogRepository.findAllByOrderByCreatedAtDesc();
     }
 
-    public Page<Blog> search(Pageable pageable,String searchContent) {
-        return blogRepository.findAllByNameContainingIgnoreCase(pageable,searchContent);
-    }
+//    public Page<Blog> search(Pageable pageable,String searchContent) {
+//        return blogRepository.findAllByNameContainingIgnoreCaseOrCategoryName(pageable,searchContent);
+//    }
 
     @Override
     public Page<Blog> findByCategoryName(Pageable pageable, String category) {
         return blogRepository.findAllByCategoryNameOrderByCreatedAtDesc(pageable,category);
+    }
+
+    @Override
+    public Page<Blog> findAllByName(Pageable pageable, String searchByName) {
+        return blogRepository.findAllByNameContainingIgnoreCaseOrderByCreatedAtDesc(pageable,searchByName);
     }
 
 //    public List<Product> sort(String sortBy) {

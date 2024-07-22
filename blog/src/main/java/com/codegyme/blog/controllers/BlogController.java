@@ -22,17 +22,25 @@ public class BlogController {
     private IBlogService blogService;
 
     @GetMapping
-    public ModelAndView display(@PageableDefault(value = 2) Pageable pageable){
-//        Pageable pageable= PageRequest.of(0, 2);
-        Page<Blog> blogs = blogService.findAll(pageable);
+    public ModelAndView display(@PageableDefault(value = 1) Pageable pageable
+    ,@RequestParam(name="searchByName", defaultValue = "") String searchByName
+    ,@RequestParam(name="categoryName", defaultValue = "") String categoryName){
+        Page<Blog> blogs;
+        if(categoryName != null && !categoryName.isEmpty()){
+            blogs = blogService.findByCategoryName(pageable,categoryName);
+        } else {
+            blogs = blogService.findAllByName(pageable,searchByName);
+        }
         ModelAndView modelAndView = new ModelAndView("/blog/display");
         modelAndView.addObject("categoryArray", new String[]{"Chính trị", "Kinh tế", "Giáo dục", "Xã hội","Sống"});
         modelAndView.addObject("blogs", blogs);
+        modelAndView.addObject("searchByName", searchByName);
+        modelAndView.addObject("categoryName", categoryName);
+        modelAndView.addObject("selectedCategory", categoryName);
         return modelAndView;
     }
     @GetMapping("/category")
-    public ModelAndView category(@RequestParam("categoryName") String category,@PageableDefault(value = 2) Pageable pageable){
-//        Pageable pageable= PageRequest.of(0, 2);
+    public ModelAndView category(@RequestParam("categoryName") String category,@PageableDefault(value = 1) Pageable pageable){
         ModelAndView modelAndView = new ModelAndView("/blog/display");
         modelAndView.addObject("blogs", blogService.findByCategoryName(pageable,category));
         modelAndView.addObject("selectedCategory", category);
@@ -65,7 +73,7 @@ public class BlogController {
 
 //    @GetMapping("/sort")
 //    public String sort(@RequestParam("sortBy") String sortBy,Model model) {
-//        model.addAttribute("products",productService.sort(sortBy));
+//        model.addAttribu  te("products",productService.sort(sortBy));
 //        return "product/display";
 //    }
 
@@ -87,12 +95,5 @@ public class BlogController {
     public String delete(@ModelAttribute("blog") Blog blog) {
         blogService.remove(blog);
         return "redirect:/blog";
-    }
-    @PostMapping("/search")
-    public ModelAndView search(@RequestParam("search") String search, @PageableDefault(value = 2) Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("/blog/display");
-        modelAndView.addObject("blogs",blogService.search(pageable,search));
-        modelAndView.addObject("categoryArray", new String[]{"Chính trị", "Kinh tế", "Giáo dục", "Xã hội","Sống"});
-        return modelAndView;
     }
 }

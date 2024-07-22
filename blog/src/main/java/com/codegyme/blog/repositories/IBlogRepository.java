@@ -12,10 +12,11 @@ import java.util.List;
 public interface IBlogRepository extends JpaRepository<Blog, Integer> {
 //    @Query(nativeQuery = true, value = "select * from blogs as s where s.name like :name")
 //    List<Blog> findAllByNameContainingIgnoreCase(@Param("name") String name);
-    Page<Blog> findAllByNameContainingIgnoreCase(Pageable pageable,String name);
+//    Page<Blog> findAllByNameContainingIgnoreCase(Pageable pageable,String name);
 //    List<Blog> sortByName(String name);
     Page<Blog> findAllByOrderByCreatedAtDesc(Pageable pageable);
     List<Blog> findAllByOrderByCreatedAtDesc();
-//    List<Blog> findAllByCategoryNameOrderByCreatedAtDesc(String categoryName);
     Page<Blog> findAllByCategoryNameOrderByCreatedAtDesc(Pageable pageable,String categoryName);
+
+    Page<Blog> findAllByNameContainingIgnoreCaseOrderByCreatedAtDesc(Pageable pageable, String searchByName);
 }
