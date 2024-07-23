@@ -31,8 +31,8 @@
             <tr>
                 <td>Category:</td>
                 <td>
-                    <select th:field="*{categoryName}">
-                        <option th:each="category : ${categoryArray}" th:value="${category}" th:text="${category}" th:selected="${category==blog.categoryName}">
+                    <select th:field="*{category}">
+                        <option th:each="category : ${categoryArray}" th:value="${category.id}" th:text="${category.name}" th:selected="${category.id==blog.category.id}">
                         </option>
                     </select>
                 </td>

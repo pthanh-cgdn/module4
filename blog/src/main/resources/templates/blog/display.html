@@ -22,8 +22,8 @@
 </a>
 <form action="/blog">
     <span> Search by Category: </span>
-<select name="categoryName">
-    <option th:each="category : ${categoryArray}" th:value="${category}" th:text="${category}" th:selected="${category == selectedCategory}">
+<select name="categoryId">
+    <option th:each="category : ${categoryArray}" th:value="${category.id}" th:text="${category.name}" th:selected="${category.id == categoryId}">
     </option>
 </select>
 <button type="submit">Search</button>
@@ -48,7 +48,7 @@
             <td th:text="${index.count}"></td>
             <td th:text="${blog.name}"></td>
             <td th:text="${blog.author}"></td>
-            <td th:text="${blog.categoryName}"></td>
+            <td th:text="${blog.category.name}"></td>
 
             </td>
             <td th:text="${blog.Description}"></td>
@@ -70,10 +70,10 @@
 </table>
 <div>
     <a class="btn btn-primary" th:if="${blogs.hasPrevious()}"
-       th:href="@{/blog(page=${blogs.number - 1}, searchByName=${searchByName}, categoryName=${categoryName})}">Previous</a>
+       th:href="@{/blog(page=${blogs.number - 1}, searchByName=${searchByName}, categoryId=${categoryId})}">Previous</a>
     <span th:text="${blogs.number + 1}"></span> | <span th:text="${blogs.totalPages}"></span>
     <a class="btn btn-primary" th:if="${blogs.hasNext()}"
-       th:href="@{/blog(page=${blogs.number + 1}, searchByName=${searchByName}, categoryName=${categoryName})}">Next</a>
+       th:href="@{/blog(page=${blogs.number + 1}, searchByName=${searchByName}, categoryId=${categoryId})}">Next</a>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

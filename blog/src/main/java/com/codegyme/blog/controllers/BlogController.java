@@ -2,10 +2,11 @@ package com.codegyme.blog.controllers;
 
 import com.codegyme.blog.models.Blog;
 import com.codegyme.blog.services.IBlogService;
+import com.codegyme.blog.services.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,44 +21,45 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class BlogController {
     @Autowired
     private IBlogService blogService;
+    @Autowired
+    private ICategoryService categoryService;
 
     @GetMapping
     public ModelAndView display(@PageableDefault(value = 1) Pageable pageable
     ,@RequestParam(name="searchByName", defaultValue = "") String searchByName
-    ,@RequestParam(name="categoryName", defaultValue = "") String categoryName){
+    ,@RequestParam(name="categoryId", defaultValue = "0") String categoryId){
         Page<Blog> blogs;
-        if(categoryName != null && !categoryName.isEmpty()){
-            blogs = blogService.findByCategoryName(pageable,categoryName);
+        if(Integer.parseInt(categoryId) != 0 && !categoryId.isEmpty()){
+            blogs = blogService.findByCategoryId(Integer.parseInt(categoryId),pageable);
         } else {
-            blogs = blogService.findAllByName(pageable,searchByName);
+            blogs = blogService.findAllByName(searchByName,pageable);
         }
         ModelAndView modelAndView = new ModelAndView("/blog/display");
-        modelAndView.addObject("categoryArray", new String[]{"Chính trị", "Kinh tế", "Giáo dục", "Xã hội","Sống"});
+        modelAndView.addObject("categoryArray", categoryService.findAll());
         modelAndView.addObject("blogs", blogs);
         modelAndView.addObject("searchByName", searchByName);
-        modelAndView.addObject("categoryName", categoryName);
-        modelAndView.addObject("selectedCategory", categoryName);
+        modelAndView.addObject("categoryId", Integer.parseInt(categoryId));
         return modelAndView;
     }
     @GetMapping("/category")
-    public ModelAndView category(@RequestParam("categoryName") String category,@PageableDefault(value = 1) Pageable pageable){
+    public ModelAndView category(@RequestParam("categoryId") String categoryId,@PageableDefault(value = 1) Pageable pageable){
         ModelAndView modelAndView = new ModelAndView("/blog/display");
-        modelAndView.addObject("blogs", blogService.findByCategoryName(pageable,category));
-        modelAndView.addObject("selectedCategory", category);
-        modelAndView.addObject("categoryArray", new String[]{"Chính trị", "Kinh tế", "Giáo dục", "Xã hội","Sống"});
+        modelAndView.addObject("blogs", blogService.findByCategoryId(Integer.parseInt(categoryId),pageable));
+        modelAndView.addObject("selectedCategory", categoryService.findById(Integer.parseInt(categoryId)));
+        modelAndView.addObject("categoryArray", categoryService.findAll());
         return modelAndView;
     }
 
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("blog", new Blog());
-        model.addAttribute("categoryArray", new String[]{"Chính trị", "Kinh tế", "Giáo dục", "Xã hội","Sống"});
+        model.addAttribute("categoryArray", categoryService.findAll());
         return "blog/create";
     }
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") String id,Model model) {
         model.addAttribute("blog",blogService.findBlogById(Integer.parseInt(id)));
-        model.addAttribute("categoryArray", new String[]{"Chính trị", "Kinh tế", "Giáo dục", "Xã hội","Sống"});
+        model.addAttribute("categoryArray", categoryService.findAll());
         return "/blog/edit";
     }
     @GetMapping("/delete/{id}")
@@ -70,13 +72,7 @@ public class BlogController {
         model.addAttribute("blog",blogService.findBlogById(Integer.parseInt(id)));
         return "/blog/view";
     }
-
-
-//    @GetMapping("/sort")
-//    public String sort(@RequestParam("sortBy") String sortBy,Model model) {
-//        model.addAttribu  te("products",productService.sort(sortBy));
-//        return "product/display";
-//    }
+    
 
     @PostMapping("/create")
     public String create(@ModelAttribute("blog") Blog blog, BindingResult bindingResult, RedirectAttributes redirect) {

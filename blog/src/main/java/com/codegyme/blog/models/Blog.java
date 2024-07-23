@@ -14,8 +14,11 @@ public class Blog {
     private int id;
     @Column(name="name")
     private String name;
-    @Column(name="categoryName")
-    private String categoryName;
+
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    private Category category;
+
     @Column(name="author")
     private String author;
     @Column(name="description", columnDefinition = "TEXT")
@@ -28,27 +31,27 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(String name, String categoryName, String author, String description, String content) {
+    public Blog(String name, Category category, String author, String description, String content) {
         this.name = name;
-        this.categoryName = categoryName;
+        this.category = category;
         this.author = author;
         this.description = description;
         this.content = content;
     }
 
-    public Blog(int id, String name, String categoryName, String author, String description, String content) {
+    public Blog(int id, String name, Category category, String author, String description, String content) {
         this.id = id;
         this.name = name;
-        this.categoryName = categoryName;
+        this.category = category;
         this.author = author;
         this.description = description;
         this.content = content;
     }
 
-    public Blog(int id, String name, String categoryName, String author, String description, String content, LocalDateTime createdAt) {
+    public Blog(int id, String name, Category category, String author, String description, String content, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
-        this.categoryName = categoryName;
+        this.category = category;
         this.author = author;
         this.description = description;
         this.content = content;
@@ -71,12 +74,12 @@ public class Blog {
         this.name = name;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategory(Category category) {
+        this.category= category;
     }
 
     public String getAuthor() {

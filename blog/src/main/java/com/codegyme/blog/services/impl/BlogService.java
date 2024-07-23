@@ -38,13 +38,13 @@ public class BlogService implements IBlogService {
 
 
     @Override
-    public Page<Blog> findByCategoryName(Pageable pageable, String category) {
-        return blogRepository.findAllByCategoryNameOrderByCreatedAtDesc(pageable,category);
+    public Page<Blog> findByCategoryId(int categoryId,Pageable pageable) {
+        return blogRepository.findAllByCategoryIdOrderByCreatedAtDesc (categoryId,pageable);
     }
 
     @Override
-    public Page<Blog> findAllByName(Pageable pageable, String searchByName) {
-        return blogRepository.findAllByNameContainingIgnoreCaseOrderByCreatedAtDesc(pageable,searchByName);
+    public Page<Blog> findAllByName( String searchByName,Pageable pageable) {
+        return blogRepository.findAllByNameContainingIgnoreCaseOrderByCreatedAtDesc(searchByName,pageable);
     }
 
 //    public List<Product> sort(String sortBy) {

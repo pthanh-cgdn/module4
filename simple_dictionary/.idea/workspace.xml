@@ -5,9 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4eb87c54-efe8-4135-8315-d345de28e2df" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/models/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/repositories/ICategoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/services/ICategoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/services/impl/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/controllers/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/controllers/BlogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/models/Blog.java" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/models/Blog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/repositories/IBlogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/repositories/IBlogRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/services/IBlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/services/IBlogService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/services/impl/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/java/com/codegyme/blog/services/impl/BlogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/delete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/display.html" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/display.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/../blog/src/main/resources/templates/blog/view.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
