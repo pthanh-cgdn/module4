@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Song Collection</title>
+    <meta charset="UTF-8">
+    <th:block th:replace="~{common/template::linkBootstrap}">
+    </th:block>
+</head>
+<body>
+<nav th:replace="~{common/template::navbar}">
+
+</nav>
+<div class="container">
+    <p style="color: blue" th:text="${message}"></p>
+    <button class="btn btn-primary mt-4" onclick="window.location.href='/song/create'">Add</button>
+    <form action="/song">
+        <input class="form-control" th:value="${songName}" name="songName" style="width: 50%">
+        <button type="submit" class="btn btn-info">Search</button>
+    </form>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Artist Name</th>
+            <th>Music Type</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tbody>
+        <tr th:each="song, iterStat: ${songs}">
+            <td th:text="${iterStat.count}"></td>
+            <td th:text="${song.title}"></td>
+            <td th:text="${song.artist}"></td>
+            <td th:text="${song.type}"></td>
+            <td>
+                <button class="btn btn-warning"
+                        th:onclick="'window.location.href = \'' + @{/song/update/{id}(id=${song.id})} + '\''">Edit
+                </button>
+                <button class="btn btn-danger">Delete
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+<!--    <nav aria-label="Page navigation example">-->
+<!--        <ul class="pagination">-->
+<!--            <li class="page-item" th:if="${students.hasPrevious()}">-->
+<!--                <a class="page-link" th:href="@{/student(page=${students.number - 1}, nameStudent=${nameStudent})}" aria-label="Previous">-->
+<!--                    <span aria-hidden="true">&laquo;</span>-->
+
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="page-item" th:if="${students.hasNext()}">-->
+<!--                <a class="page-link" th:href="@{/student(page=${students.number + 1}, nameStudent=${nameStudent})}" aria-label="Next">-->
+<!--                    <span aria-hidden="true">&raquo;</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+</div>
+</body>
+
+</html>

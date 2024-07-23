@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Add new song</title>
+  <th:block th:replace="~{common/template::linkBootstrap}"></th:block>
+</head>
+<body>
+<nav th:replace="~{common/template::navbar}"></nav>
+<div class="container">
+  <form method="post" th:object="${songDto}">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" th:field="*{title}"/>
+      <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color: red; font-style: italic"></p>
+    </div>
+    <div class="mb-3">
+      <label for="artist" class="form-label">Artist Name</label>
+      <input type="text" class="form-control" id="artist" th:field="*{artist}"/>
+      <p th:if="${#fields.hasErrors('artist')}" th:errors="*{artist}" style="color: red; font-style: italic"></p>
+    </div>
+    <div class="mb-3">
+      <label for="type" class="form-label">Music Type</label>
+      <input type="text" class="form-control" id="type" name="type" th:field="*{type}"/>
+      <p th:if="${#fields.hasErrors('type')}" th:errors="*{type}" style="color: red; font-style: italic"></p>
+    </div>
+    <button type="submit" class="btn btn-primary">Add new Song</button>
+  </form>
+</div>
+</body>
+</html>

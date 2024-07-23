@@ -72,7 +72,7 @@ public class BlogController {
         model.addAttribute("blog",blogService.findBlogById(Integer.parseInt(id)));
         return "/blog/view";
     }
-    
+
 
     @PostMapping("/create")
     public String create(@ModelAttribute("blog") Blog blog, BindingResult bindingResult, RedirectAttributes redirect) {
