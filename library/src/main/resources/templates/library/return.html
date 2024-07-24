@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Return</title>
+    <th:block th:replace="~{common/template::linkBootstrap}">
+    </th:block>
+</head>
+<body>
+<nav th:replace="~{common/template::navbar}">
+</nav>
+<form method="post" action="/library/return">
+    <div class="mb-3">
+        <p style="color: red; font-style: italic" th:text="${message}"></p>
+        <label for="borrowedKey" class="form-label">Please input your borrowed key</label>
+        <input type="number" class="form-control" id="borrowedKey" name="borrowedKey" th:value="${borrowedKey}" />
+    </div>
+    <button type="submit" class="btn btn-primary">Return Book</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Library</title>
+    <meta charset="UTF-8">
+    <th:block th:replace="~{common/template::linkBootstrap}">
+    </th:block>
+</head>
+<body>
+<nav th:replace="~{common/template::navbar}">
+
+</nav>
+<div class="container">
+    <p style="color: blue" th:text="${message}"></p>
+    <button class="btn btn-primary mt-4" onclick="window.location.href='/library/return'">Return book</button>
+    <form action="/library">
+        <input class="form-control" th:value="${searchByName}" name="searchByName" style="width: 50%">
+        <button type="submit" class="btn btn-info">Search</button>
+    </form>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Author Name</th>
+            <th>Publisher</th>
+            <th>Public Year</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book, iterStat: ${books}">
+            <td th:text="${iterStat.count}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.publisher}"></td>
+            <td th:text="${book.year}"></td>
+            <td th:text="${book.quantity}"></td>
+            <td>
+                <button class="btn btn-warning"
+                        th:onclick="'window.location.href = \'' + @{/library/view/{id}(id=${book.id})} + '\''">Detail
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <a class="btn btn-primary" th:if="${books.hasPrevious()}"
+           th:href="@{/library(page=${books.number - 1}, searchByName=${searchByName})}">Previous</a>
+        <span th:text="${books.number + 1}"></span> | <span th:text="${books.totalPages}"></span>
+        <a class="btn btn-primary" th:if="${books.hasNext()}"
+           th:href="@{/library(page=${books.number + 1}, searchByName=${searchByName})}">Next</a>
+    </div>
+</div>
+</body>
+
+</html>

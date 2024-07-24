@@ -67,4 +67,9 @@ public class StudentController {
 //....
         return "student/update";
     }
+    @ExceptionHandler(Exception.class)
+    public String handleError(Model model, Exception exception) {
+        model.addAttribute("message", exception.getMessage());
+        return "errors/404";
+    }
 }

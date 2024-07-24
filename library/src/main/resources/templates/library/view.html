@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Update Song</title>
+  <th:block th:replace="~{common/template::linkBootstrap}"></th:block>
+</head>
+<body>
+<nav th:replace="~{common/template::navbar}"></nav>
+<div class="container">
+  <form method="post" action="/library/borrow" th:object="${book}">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" th:field="*{title}" readonly />
+      <input type="hidden" class="form-control" id="id" th:field="*{id}"/>
+    </div>
+    <div class="mb-3">
+      <label for="author" class="form-label">Author</label>
+      <input type="text" class="form-control" id="author" th:field="*{author}" readonly/>
+    </div>
+    <div class="mb-3">
+      <label for="publisher" class="form-label">Publisher</label>
+      <input type="text" class="form-control" id="publisher" th:field="*{publisher}" readonly/>
+    </div>
+    <div class="mb-3">
+      <label for="Year" class="form-label">Year</label>
+      <input type="text" class="form-control" id="year" th:field="*{year}" readonly/>
+    </div>
+    <div class="mb-3">
+      <label for="quantity" class="form-label">Quantity</label>
+      <input type="text" class="form-control" id="quantity" th:field="*{quantity}" readonly/>
+    </div>
+    <button type="submit" class="btn btn-primary" th:disabled="${book.quantity <= 0}">Borrow Book</button>
+    <div  th:if="${book.quantity <= 0}" style="font-style: italic; color: red" >This book is not available. Please visit again later</div>
+  </form>
+</div>
+
+</body>
+</html>

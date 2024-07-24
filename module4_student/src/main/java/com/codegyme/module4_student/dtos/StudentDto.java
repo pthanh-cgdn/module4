@@ -73,6 +73,5 @@ public class StudentDto implements Validator {
             errors.rejectValue("address", "", "Địa chỉ không được lớn hơn 255 ký tự");
         }
 
-
     }
 }

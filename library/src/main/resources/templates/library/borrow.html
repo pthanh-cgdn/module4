@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Borrow Book</title>
+  <th:block th:replace="~{common/template::linkBootstrap}"></th:block>
+</head>
+<body>
+<nav th:replace="~{common/template::navbar}"></nav>
+<div class="container">
+
+  <div class="form-label">Your order is successfully executed. You borrowed key is <span style="color: red" th:text="${borrowedKey}"></span>
+  </div>
+  <button class="btn btn-primary mt-4" onclick="window.location.href='/library'">Back to Library</button>
+</div>
+</body>
+</html>
