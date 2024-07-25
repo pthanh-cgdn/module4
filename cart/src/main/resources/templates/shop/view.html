@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Update Song</title>
+  <th:block th:replace="~{common/template::linkBootstrap}"></th:block>
+</head>
+<body>
+<nav th:replace="~{common/template::navbar}"></nav>
+<div class="container">
+  <form method="post" action="/shop/addToCart" th:object="${product}">
+    <div class="mb-3">
+      <label for="title" class="form-label">Name</label>
+      <input type="text" class="form-control" id="title" th:field="*{name}" readonly />
+      <input type="hidden" class="form-control" id="id" th:field="*{id}"/>
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input type="text" class="form-control" id="price" th:field="*{price}" readonly/>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input type="text" class="form-control" id="description" th:field="*{description}" readonly/>
+    </div>
+    <button type="submit" class="btn btn-primary" >Add to Cart</button>
+  </form>
+</div>
+
+</body>
+</html>

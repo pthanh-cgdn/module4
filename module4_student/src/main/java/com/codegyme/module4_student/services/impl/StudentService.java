@@ -29,4 +29,9 @@ public class StudentService implements IStudentService {
     public Page<Student> findAllByName(String name, Pageable pageable) {
         return studentRepository.findAllByNameContaining("%"+ name+"%", pageable);
     }
+
+    @Override
+    public Student findById(Long id) {
+        return studentRepository.findById(id).orElse(null);
+    }
 }

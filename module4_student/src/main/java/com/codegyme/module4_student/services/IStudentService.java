@@ -13,4 +13,6 @@ public interface IStudentService {
     void save(Student student);
 
     Page<Student> findAllByName(String name, Pageable pageable);
+
+    Student findById(Long id);
 }

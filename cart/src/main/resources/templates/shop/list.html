@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Shop</title>
+    <meta charset="UTF-8">
+    <th:block th:replace="~{common/template::linkBootstrap}">
+    </th:block>
+</head>
+<body>
+<nav th:replace="~{common/template::navbar}">
+
+</nav>
+<div class="container">
+    <p style="color: blue" th:text="${message}"></p>
+    <button class="btn btn-primary mt-4" onclick="window.location.href='/shop/cart'">Show cart</button>
+    <form action="/shop">
+        <input class="form-control" th:value="${searchByName}" name="searchByName" style="width: 50%">
+        <button type="submit" class="btn btn-info">Search</button>
+    </form>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product, iterStat: ${products}">
+            <td th:text="${iterStat.count}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.description}"></td>
+            <td>
+                <button class="btn btn-success" th:onclick="'window.location.href = \'' + @{/shop/view/{id}(id=${product.id})} + '\''">
+                    View
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <a class="btn btn-primary" th:if="${products.hasPrevious()}"
+           th:href="@{/shop(page=${products.number - 1}, searchByName=${searchByName})}">Previous</a>
+        <span th:text="${products.number + 1}"></span> | <span th:text="${products.totalPages}"></span>
+        <a class="btn btn-primary" th:if="${products.hasNext()}"
+           th:href="@{/shop(page=${products.number + 1}, searchByName=${searchByName})}">Next</a>
+    </div>
+</div>
+</body>
+
+</html>
