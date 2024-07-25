@@ -1,5 +1,6 @@
 package com.codegyme.library.aspect;
 
+import com.codegyme.library.models.BorrowedBook;
 import jakarta.validation.Valid;
 import lombok.Value;
 import org.aspectj.lang.JoinPoint;
@@ -18,17 +19,22 @@ import java.time.LocalDateTime;
 public class UserAspect {
     private static int visitorCount;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    @AfterReturning(value = "execution(* com.codegyme.library.repositories.IBorrowedBookRepository.save(..))")
+    @After(value = "execution(* com.codegyme.library.repositories.IBorrowedBookRepository.save(..))")
     public void logAfterBorrowABook(JoinPoint joinPoint) {
-        logger.info("user borrowed a book at " + LocalDateTime.now());
+        Object[] args = joinPoint.getArgs();
+        BorrowedBook borrowedBook = (BorrowedBook) args[0];
+        logger.info("user borrowed book "+borrowedBook.getBook().getTitle() + " at " + LocalDateTime.now());
     }
-    @AfterReturning("execution(* com.codegyme.library.repositories.IBorrowedBookRepository.deleteById(..))")
+    @After("execution(* com.codegyme.library.repositories.IBorrowedBookRepository.deleteById(..))")
     public void logAfterReturnABook(JoinPoint joinPoint) {
-        logger.info("user returned a book at " + LocalDateTime.now());
+        Object[] args = joinPoint.getArgs();
+        BorrowedBook borrowedBook = (BorrowedBook) args[0];
+        logger.info("user return book "+borrowedBook.getBook().getTitle() + " at " + LocalDateTime.now());
+
     }
     @Before("execution(* com.codegyme.library.controllers.UserController.display(..))")
     public void incrementVisitorCount() {
         visitorCount++;
-        logger.info("Visitor count: " + visitorCount);
+        logger.info("Visitor to homepage count: " + visitorCount);
     }
 }

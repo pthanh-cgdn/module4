@@ -38,7 +38,7 @@
             <td th:text="${book.year}"></td>
             <td th:text="${book.quantity}"></td>
             <td>
-                <button class="btn btn-warning"
+                <button class="btn btn-success"
                         th:onclick="'window.location.href = \'' + @{/library/view/{id}(id=${book.id})} + '\''">Detail
                 </button>
             </td>

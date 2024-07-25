@@ -20,10 +20,10 @@ public class BorrowedBookService implements IBorrowedBookService {
     IBookService bookService;
     @Override
     public BorrowedBook save(BorrowedBook borrowedBook) {
-        Long id = ThreadLocalRandom.current().nextLong(10000,99999);
-        while (borrowedBookRepository.findById(id).isPresent()){
+        Long id;
+         do {
             id=ThreadLocalRandom.current().nextLong(10000,99999);
-        }
+        } while (borrowedBookRepository.findById(id).isPresent());
         borrowedBook.setId(id);
         if(bookService.borrow(borrowedBook.getBook())) {
             borrowedBookRepository.save(borrowedBook);
