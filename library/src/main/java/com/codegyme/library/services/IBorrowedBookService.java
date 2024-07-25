@@ -5,5 +5,7 @@ import com.codegyme.library.models.BorrowedBook;
 public interface IBorrowedBookService {
     BorrowedBook save(BorrowedBook borrowedBook);
 
-    boolean returnBook(Long borrowedKey);
+    boolean returnBook(BorrowedBook borrowedBook);
+
+    BorrowedBook findById(Long borrowedKey);
 }

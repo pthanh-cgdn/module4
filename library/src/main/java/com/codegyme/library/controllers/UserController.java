@@ -49,7 +49,7 @@ public class UserController {
     }
     @PostMapping("/return")
     public String postReturnBook(Model model, @RequestParam(value="borrowedKey",defaultValue = "0") Long borrowedKey) {
-        boolean isReturn = borrowedBookService.returnBook(borrowedKey);
+        boolean isReturn = borrowedBookService.returnBook(borrowedBookService.findById(borrowedKey));
         if (isReturn){
             return "redirect:/library";
         } else {

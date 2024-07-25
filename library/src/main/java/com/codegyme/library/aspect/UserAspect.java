@@ -25,7 +25,7 @@ public class UserAspect {
         BorrowedBook borrowedBook = (BorrowedBook) args[0];
         logger.info("user borrowed book "+borrowedBook.getBook().getTitle() + " at " + LocalDateTime.now());
     }
-    @After("execution(* com.codegyme.library.repositories.IBorrowedBookRepository.deleteById(..))")
+    @After("execution(* com.codegyme.library.repositories.IBorrowedBookRepository.delete(..))")
     public void logAfterReturnABook(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         BorrowedBook borrowedBook = (BorrowedBook) args[0];

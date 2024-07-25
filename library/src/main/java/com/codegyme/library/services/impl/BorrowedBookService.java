@@ -33,13 +33,18 @@ public class BorrowedBookService implements IBorrowedBookService {
     }
 
     @Override
-    public boolean returnBook(Long borrowedKey) {
-       if(borrowedBookRepository.findById(borrowedKey).isPresent()){
-           Book book = borrowedBookRepository.findById(borrowedKey).get().getBook();
+    public boolean returnBook(BorrowedBook borrowedBook) {
+       if(borrowedBook!=null){
+           Book book = borrowedBook.getBook();
            bookService.returnBook(book);
-           borrowedBookRepository.deleteById(borrowedKey);
+           borrowedBookRepository.delete(borrowedBook);
            return true;
        }
        return false;
+    }
+
+    @Override
+    public BorrowedBook findById(Long borrowedKey) {
+        return borrowedBookRepository.findById(borrowedKey).orElse(null);
     }
 }
