@@ -20,4 +20,6 @@ public interface IBlogService {
     public Page<Blog> findByCategoryId( int categoryId,Pageable pageable);
 
     Page<Blog> findAllByName( String searchByName,Pageable pageable);
+
+    Page<Blog> findByCategory(String category, Pageable pageable);
 }

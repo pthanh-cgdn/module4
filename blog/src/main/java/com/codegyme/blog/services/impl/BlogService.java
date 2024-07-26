@@ -47,6 +47,11 @@ public class BlogService implements IBlogService {
         return blogRepository.findAllByNameContainingIgnoreCaseOrderByCreatedAtDesc(searchByName,pageable);
     }
 
+    @Override
+    public Page<Blog> findByCategory(String category, Pageable pageable) {
+        return blogRepository.findAllByCategoryNameOrderByCreatedAtDesc(category,pageable);
+    }
+
 //    public List<Product> sort(String sortBy) {
 //        return productRepository.sortByName(sortBy);
 //    }

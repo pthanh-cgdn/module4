@@ -2,8 +2,10 @@ package com.codegyme.module4_student.models;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity(name = "student")
-public class Student {
+public class Student implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -16,22 +18,24 @@ public class Student {
     private Float score;
     @ManyToOne
     @JoinColumn(name="class_id")
-    private Classroom classRoom;
+    private Classroom classroom;
 
     public Student() {
     }
 
-    public Student(Long id, String name, String address, Float score) {
+    public Student(Long id, String name, String address, Float score, Classroom classroom) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.score = score;
+        this.classroom = classroom;
     }
 
-    public Student(String name, String address, Float score) {
+    public Student(String name, String address, Float score, Classroom classroom) {
         this.name = name;
         this.address = address;
         this.score = score;
+        this.classroom = classroom;
     }
 
     public Long getId() {
@@ -66,11 +70,11 @@ public class Student {
         this.score = score;
     }
 
-    public Classroom getClassRoom() {
-        return classRoom;
+    public Classroom getClassroom() {
+        return classroom;
     }
 
-    public void setClassRoom(Classroom classRoom) {
-        this.classRoom = classRoom;
+    public void setClassroom(Classroom classRoom) {
+        this.classroom = classRoom;
     }
 }

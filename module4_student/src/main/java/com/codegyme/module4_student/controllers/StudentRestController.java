@@ -24,12 +24,14 @@ public class StudentRestController {
         return new ResponseEntity<>(students, HttpStatus.BAD_REQUEST);
     }
     @PostMapping
-    public ResponseEntity<?> addStudent(@RequestBody Student student) {
+    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
         studentRepository.save(student);
         return new ResponseEntity<>(student, HttpStatus.CREATED);
     }
+
+
     @PutMapping
-    public ResponseEntity<?> updateStudent(@RequestBody Student student) {
+    public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
         if (studentRepository.findById(student.getId()).isPresent()){
             studentRepository.save(student);
         }

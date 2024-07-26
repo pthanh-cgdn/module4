@@ -25,7 +25,7 @@ public class BlogController {
     private ICategoryService categoryService;
 
     @GetMapping
-    public ModelAndView display(@PageableDefault(value = 1) Pageable pageable
+    public ModelAndView display(@PageableDefault(value = 5) Pageable pageable
     ,@RequestParam(name="searchByName", defaultValue = "") String searchByName
     ,@RequestParam(name="categoryId", defaultValue = "0") String categoryId){
         Page<Blog> blogs;
@@ -42,7 +42,7 @@ public class BlogController {
         return modelAndView;
     }
     @GetMapping("/category")
-    public ModelAndView category(@RequestParam("categoryId") String categoryId,@PageableDefault(value = 1) Pageable pageable){
+    public ModelAndView category(@RequestParam("categoryId") String categoryId,@PageableDefault(value = 5) Pageable pageable){
         ModelAndView modelAndView = new ModelAndView("/blog/display");
         modelAndView.addObject("blogs", blogService.findByCategoryId(Integer.parseInt(categoryId),pageable));
         modelAndView.addObject("selectedCategory", categoryService.findById(Integer.parseInt(categoryId)));
