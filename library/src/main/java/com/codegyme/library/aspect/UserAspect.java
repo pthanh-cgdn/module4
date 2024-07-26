@@ -4,10 +4,7 @@ import com.codegyme.library.models.BorrowedBook;
 import jakarta.validation.Valid;
 import lombok.Value;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -56,9 +53,20 @@ public class UserAspect {
         logger.info("user return book "+borrowedBook.getBook().getTitle() + " at " + LocalDateTime.now());
 
     }
-    @Before("execution(* com.codegyme.library.controllers.UserController.display(..))")
-    public void incrementVisitorCount() {
+
+    @AfterThrowing(value = "execution(* com.codegyme.library.controllers.UserController.*(..))", throwing = "ex")
+    public void logVisitorsAfterThrowing(JoinPoint joinPoint, Throwable ex) {
         visitorCount++;
-        logger.info("Visitor to homepage count: " + visitorCount);
+
+        File file = new File(URL_LOG_BOOK);
+        try {
+            FileWriter fileWriter = new FileWriter(file, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            String log = "user access feature at " + LocalDateTime.now() + ", Total visitor: " + visitorCount + "\n";
+            bufferedWriter.write(log);
+            bufferedWriter.flush();
+        } catch (Exception e) {
+            logger.error("Lỗi ghi file", e);
+        }
     }
 }
