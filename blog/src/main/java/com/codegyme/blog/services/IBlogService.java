@@ -16,10 +16,12 @@ public interface IBlogService {
     public boolean editBlog(Blog blog);
 
     public Page<Blog> findAll(Pageable pageable);
+    public List<Blog> findAll();
 
     public Page<Blog> findByCategoryId( int categoryId,Pageable pageable);
 
     Page<Blog> findAllByName( String searchByName,Pageable pageable);
+    List<Blog> findAllByName( String searchByName);
 
     Page<Blog> findByCategory(String category, Pageable pageable);
 }

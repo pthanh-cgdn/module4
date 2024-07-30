@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
-@RequestMapping("/blog")
+@RequestMapping("/blogs")
 public class BlogController {
     @Autowired
     private IBlogService blogService;

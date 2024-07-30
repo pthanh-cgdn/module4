@@ -36,6 +36,11 @@ public class BlogService implements IBlogService {
             return blogRepository.findAll(pageable);
     }
 
+    @Override
+    public List<Blog> findAll() {
+        return blogRepository.findAllOrderByCreatedAtDesc();
+    }
+
 
     @Override
     public Page<Blog> findByCategoryId(int categoryId,Pageable pageable) {
@@ -43,8 +48,13 @@ public class BlogService implements IBlogService {
     }
 
     @Override
-    public Page<Blog> findAllByName( String searchByName,Pageable pageable) {
+    public Page<Blog> findAllByName(String searchByName,Pageable pageable) {
         return blogRepository.findAllByNameContainingIgnoreCaseOrderByCreatedAtDesc(searchByName,pageable);
+    }
+
+    @Override
+    public List<Blog> findAllByName(String searchByName) {
+        return blogRepository.findAllByNameContainingIgnoreCaseOrderByCreatedAtDesc(searchByName);
     }
 
     @Override

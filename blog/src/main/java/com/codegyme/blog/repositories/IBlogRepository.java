@@ -16,7 +16,9 @@ public interface IBlogRepository extends JpaRepository<Blog, Integer> {
 //    List<Blog> sortByName(String name);
     Page<Blog> findAllByCategoryNameOrderByCreatedAtDesc(String categoryName,Pageable pageable);
     Page<Blog> findAllByNameContainingIgnoreCaseOrderByCreatedAtDesc( String searchByName,Pageable pageable);
-
+    List<Blog> findAllByNameContainingIgnoreCaseOrderByCreatedAtDesc(String searchByName);
+    @Query(nativeQuery = true, value = "select * from blogs as s order by s.created_at desc")
+    List<Blog> findAllOrderByCreatedAtDesc();
     @Query(nativeQuery = true, value = "select * from blogs as s where s.category_id = :categoryId order by s.created_at desc")
     Page<Blog> findAllByCategoryIdOrderByCreatedAtDesc(@Param("categoryId")int categoryId, Pageable pageable);
 }

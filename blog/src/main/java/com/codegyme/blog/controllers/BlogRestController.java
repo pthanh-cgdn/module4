@@ -15,13 +15,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/blogs")
+@CrossOrigin("*")
 public class BlogRestController {
     @Autowired
     private IBlogService blogService;
     @GetMapping
     public ResponseEntity<?> getAllBlog() {
-        Page<Blog> blogs = blogService.findAll(Pageable.ofSize(5));
-        if(blogs.getTotalElements() > 0) {
+        List<Blog> blogs = blogService.findAll();
+        if(blogs != null && !blogs.isEmpty()) {
+            return new ResponseEntity<>(blogs, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @GetMapping("search/{searchByName}")
+    public ResponseEntity<?> getBlogByNam(@PathVariable String searchByName) {
+        List<Blog> blogs = blogService.findAllByName(searchByName);
+        if(blogs != null && !blogs.isEmpty()) {
             return new ResponseEntity<>(blogs, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

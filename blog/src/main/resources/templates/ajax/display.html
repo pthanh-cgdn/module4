@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous" async></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/blogs">Blog</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        </div>
+        <div class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchByName"
+                   name="searchByName">
+            <button type="button" id="searchContent" class="btn btn-outline-success">Search</button>
+        </div>
+    </div>
+</nav>
+
+<a href="api/blogs/create">
+    <p th:if="${message} != null">
+        <span class="message" th:text="${message}"></span>
+    </p>
+    <button class="btn btn-primary mt-4">Add new Blog</button>
+</a>
+<div id="searchResult">
+</div>
+<button id="loadMorePage" class="btn btn-secondary">Load more</button>
+<script>
+    let currentPage = 1;
+    let pageSize = 2;
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/api/blogs",
+            success: function (data) {
+                let content = '<table class="table table-hover">\n' +
+                    '<thead>\n' +
+                    '<tr>\n' +
+                    '<th>ID\n' +
+                    '</th>\n' +
+                    '<th>Name\n' +
+                    '</th>\n' +
+                    '<th>Author\n' +
+                    '</th>\n' +
+                    '<th>Category\n' +
+                    '</th>\n' +
+                    '<th>Description </th>\n' +
+                    '</tr>\n' +
+                    '</thead>\n' +
+                    '<tbody>\n';
+                if (data === undefined) {
+                    content = "No blog match";
+                } else {
+                    for (let i = 0; i < data.length; i++) {
+                        if (i >= currentPage * pageSize) {
+                            break;
+                        }
+                        content += '<tr> <td>' + data[i].id + '</td>';
+                        content += '<td>' + data[i].name + '</td>';
+                        content += '<td>' + data[i].author + '</td>';
+                        content += '<td>' + data[i].category.name + '</td>';
+                        content += '<td>' + data[i].description + '</td> </tr>';
+                    }
+
+                    content += '</tbody>';
+                    content += '</table>\n';
+                    if (data.length <= currentPage * pageSize) {
+                        $('#loadMorePage').hide();
+                    }
+                }
+                currentPage = currentPage + 1;
+                document.getElementById('searchResult').innerHTML = content;
+            }
+        });
+    });
+
+    $('#loadMorePage').click(function () {
+        console.log(currentPage);
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/api/blogs",
+                success: function (data) {
+                    let content = '<table class="table table-hover">\n' +
+                        '<thead>\n' +
+                        '<tr>\n' +
+                        '<th>ID\n' +
+                        '</th>\n' +
+                        '<th>Name\n' +
+                        '</th>\n' +
+                        '<th>Author\n' +
+                        '</th>\n' +
+                        '<th>Category\n' +
+                        '</th>\n' +
+                        '<th>Description </th>\n' +
+                        '</tr>\n' +
+                        '</thead>\n' +
+                        '<tbody>\n';
+                    if (data === undefined) {
+                        content = "No blog match";
+                    } else {
+                        for (let i = 0; i < data.length; i++) {
+                            if (i >= currentPage * pageSize) {
+                                console.log(i);
+                                break;
+                            }
+                            content += '<tr> <td>' + data[i].id + '</td>';
+                            content += '<td>' + data[i].name + '</td>';
+                            content += '<td>' + data[i].author + '</td>';
+                            content += '<td>' + data[i].category.name + '</td>';
+                            content += '<td>' + data[i].description + '</td> </tr>';
+                        }
+
+                        content += '</tbody>';
+                        content += '</table>\n';
+                        if (data.length <= currentPage * pageSize) {
+                            $('#loadMorePage').hide();
+                        }
+                    }
+                    currentPage = currentPage + 1;
+                    document.getElementById('searchResult').innerHTML = content;
+                }
+            });
+        }
+    );
+
+    $('#searchContent').click(function () {
+        let search = $('#searchByName').val();
+        $.ajax({
+            url: "http://localhost:8080/api/blogs/search/" + search,
+            type: "GET",
+            success: function (data) {
+                let content =
+                    '<table class="table table-hover">\n' +
+                    '<thead>\n' +
+                    '<tr>\n' +
+                    '<th>ID\n' +
+                    '</th>\n' +
+                    '<th>Name\n' +
+                    '</th>\n' +
+                    '<th>Author\n' +
+                    '</th>\n' +
+                    '<th>Category\n' +
+                    '</th>\n' +
+                    '<th>Description </th>\n' +
+                    '</tr>\n' +
+                    '</thead>\n' +
+                    '<tbody>\n';
+                if (data === undefined) {
+                    content = "No blog match";
+                } else {
+                    for (let i = 0; i < data.length; i++) {
+                        content += '<tr> <td>' + data[i].id + '</td>';
+                        content += '<td>' + data[i].name + '</td>';
+                        content += '<td>' + data[i].author + '</td>';
+                        content += '<td>' + data[i].category.name + '</td>';
+                        content += '<td>' + data[i].description + '</td> </tr>';
+                    }
+                    content += '</tbody>';
+                    content += '</table>';
+                }
+                document.getElementById('searchResult').innerHTML = content;
+
+            },
+            error: function (err) {
+                alert("Lỗi")
+                console.log(err);
+            }
+
+        })
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

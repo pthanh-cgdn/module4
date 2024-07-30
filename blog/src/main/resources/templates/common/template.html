@@ -14,17 +14,17 @@
 <body>
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/blog">Blog</a>
+        <a class="navbar-brand" href="/blogs">Blog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         </div>
-        <form class="d-flex" action="/blog">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchByName">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <div class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchByName" name="searchByName">
+            <button type="button" id="searchContent" class="btn btn-outline-success">Search</button>
+        </div>
     </div>
 </nav>
 </body>
