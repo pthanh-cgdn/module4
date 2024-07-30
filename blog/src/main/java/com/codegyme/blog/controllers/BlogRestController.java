@@ -20,8 +20,8 @@ public class BlogRestController {
     @Autowired
     private IBlogService blogService;
     @GetMapping
-    public ResponseEntity<?> getAllBlog() {
-        List<Blog> blogs = blogService.findAll();
+    public ResponseEntity<?> getBlog(@RequestParam(value = "records", defaultValue = "0") int records) {
+        List<Blog> blogs = blogService.getBlogs(records);
         if(blogs != null && !blogs.isEmpty()) {
             return new ResponseEntity<>(blogs, HttpStatus.OK);
         }

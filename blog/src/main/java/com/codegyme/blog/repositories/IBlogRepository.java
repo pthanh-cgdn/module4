@@ -21,4 +21,7 @@ public interface IBlogRepository extends JpaRepository<Blog, Integer> {
     List<Blog> findAllOrderByCreatedAtDesc();
     @Query(nativeQuery = true, value = "select * from blogs as s where s.category_id = :categoryId order by s.created_at desc")
     Page<Blog> findAllByCategoryIdOrderByCreatedAtDesc(@Param("categoryId")int categoryId, Pageable pageable);
+
+    @Query(nativeQuery = true, value = "select * from blogs as s order by s.created_at desc limit :records ")
+    List<Blog> findBlog(@Param("records") int records);
 }

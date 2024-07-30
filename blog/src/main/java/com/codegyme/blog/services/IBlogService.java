@@ -17,6 +17,7 @@ public interface IBlogService {
 
     public Page<Blog> findAll(Pageable pageable);
     public List<Blog> findAll();
+    public List<Blog> getBlogs(int records);
 
     public Page<Blog> findByCategoryId( int categoryId,Pageable pageable);
 

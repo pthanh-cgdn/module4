@@ -44,10 +44,13 @@
 <script>
     let currentPage = 1;
     let pageSize = 2;
-    $(document).ready(function () {
+    function loadData(records){
         $.ajax({
             type: "GET",
             url: "http://localhost:8080/api/blogs",
+            data:{
+                records:records
+            },
             success: function (data) {
                 let content = '<table class="table table-hover">\n' +
                     '<thead>\n' +
@@ -80,7 +83,7 @@
 
                     content += '</tbody>';
                     content += '</table>\n';
-                    if (data.length <= currentPage * pageSize) {
+                    if (data.length < currentPage * pageSize) {
                         $('#loadMorePage').hide();
                     }
                 }
@@ -88,54 +91,14 @@
                 document.getElementById('searchResult').innerHTML = content;
             }
         });
+    }
+    
+    $(document).ready(function () {
+        loadData(currentPage*pageSize);
     });
 
     $('#loadMorePage').click(function () {
-        console.log(currentPage);
-            $.ajax({
-                type: "GET",
-                url: "http://localhost:8080/api/blogs",
-                success: function (data) {
-                    let content = '<table class="table table-hover">\n' +
-                        '<thead>\n' +
-                        '<tr>\n' +
-                        '<th>ID\n' +
-                        '</th>\n' +
-                        '<th>Name\n' +
-                        '</th>\n' +
-                        '<th>Author\n' +
-                        '</th>\n' +
-                        '<th>Category\n' +
-                        '</th>\n' +
-                        '<th>Description </th>\n' +
-                        '</tr>\n' +
-                        '</thead>\n' +
-                        '<tbody>\n';
-                    if (data === undefined) {
-                        content = "No blog match";
-                    } else {
-                        for (let i = 0; i < data.length; i++) {
-                            if (i >= currentPage * pageSize) {
-                                console.log(i);
-                                break;
-                            }
-                            content += '<tr> <td>' + data[i].id + '</td>';
-                            content += '<td>' + data[i].name + '</td>';
-                            content += '<td>' + data[i].author + '</td>';
-                            content += '<td>' + data[i].category.name + '</td>';
-                            content += '<td>' + data[i].description + '</td> </tr>';
-                        }
-
-                        content += '</tbody>';
-                        content += '</table>\n';
-                        if (data.length <= currentPage * pageSize) {
-                            $('#loadMorePage').hide();
-                        }
-                    }
-                    currentPage = currentPage + 1;
-                    document.getElementById('searchResult').innerHTML = content;
-                }
-            });
+        loadData(currentPage*pageSize);
         }
     );
 

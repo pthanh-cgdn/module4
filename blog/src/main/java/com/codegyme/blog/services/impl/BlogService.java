@@ -41,6 +41,11 @@ public class BlogService implements IBlogService {
         return blogRepository.findAllOrderByCreatedAtDesc();
     }
 
+    @Override
+    public List<Blog> getBlogs(int records) {
+        return blogRepository.findBlog(records);
+    }
+
 
     @Override
     public Page<Blog> findByCategoryId(int categoryId,Pageable pageable) {
